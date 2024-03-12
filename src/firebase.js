@@ -3,13 +3,13 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDGYNedMTETeqeD9MpwwzHiEmKczkBPugw",
-    authDomain: "test-chat-c56a6.firebaseapp.com",
-    projectId: "test-chat-c56a6",
-    storageBucket: "test-chat-c56a6.appspot.com",
-    messagingSenderId: "188883407854",
-    appId: "1:188883407854:web:fcf414078c38a19009b4ff",
-    measurementId: "G-SXR1SL4656"
+    apiKey: `${process.env.apiKey}`,
+    authDomain: `${process.env.authDomain}`,
+    projectId: `${process.env.projectId}`,
+    storageBucket: `${process.env.storageBucket}`,
+    messagingSenderId: `${process.env.messagingSenderId}`,
+    appId: `${process.env.appId}`,
+    measurementId: `${process.env.measurementId}`
 };
 
 firebase.initializeApp(firebaseConfig);

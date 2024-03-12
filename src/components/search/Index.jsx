@@ -1,34 +1,36 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import style from "./search.module.css"
+import { Link } from "react-router-dom";
 
 const Search = () => {
   const [input, setInput] = useState("")
   const [result, setResult] = useState([])
   const [data, setData] = useState([])
+  console.log(data)
 
   const handleChange = (value) => {
-      setInput(value);
-      inputSearch(value)
+    setInput(value);
+    inputSearch(value)
   };
 
   const inputSearch = ((value) => {
-      const result = data.filter((product) => {
-          return (
-              product &&
-              product.product_name &&
-              product.product_name.toLowerCase().includes(value)
-          );
-      });
-      setResult(result);
+    const result = data.filter((data) => {
+      return (
+        data &&
+        data.name &&
+        data.name.toLowerCase().includes(value)
+      );
+    });
+    setResult(result);
   })
 
   useEffect(() => {
-      axios.get(`https://blanja-backend-v2.vercel.app/products`)
-          .then((res) => {
-              setData(res.data.data)
-          })
-  },[])
+    axios.get(`https://pokeapi.co/api/v2/pokemon`)
+      .then((res) => {
+        setData(res.data.results)
+      })
+  }, [])
 
   return (
     <div className={style.container}>
@@ -46,9 +48,11 @@ const Search = () => {
       ) : (
         <div className={style.searchResult}>
           {result.map((result, id) => (
-            <button className={style.btnResult} key={id}>
-              {result.product_name}
-            </button>
+            <Link to={result.url}>
+              <button className={style.btnResult} key={id}>
+                {result.name}
+              </button>
+            </Link>
           ))}
         </div>
       )}
